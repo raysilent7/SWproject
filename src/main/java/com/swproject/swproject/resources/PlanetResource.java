@@ -1,6 +1,8 @@
 package com.swproject.swproject.resources;
 
 import com.swproject.swproject.domain.Planet;
+import com.swproject.swproject.domain.dto.PlanetDTO;
+import com.swproject.swproject.services.PlanetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +20,9 @@ public class PlanetResource {
     private PlanetService service;
 
     @GetMapping
-    public ResponseEntity<List<Planet>> findAll() {
+    public ResponseEntity<List<PlanetDTO>> findAll() {
         List<Planet> list = service.findAll();
-        List<UserDto> listDto = list.stream().map(x -> new UserDto(x)).collect(Collectors.toList());
-        return ResponseEntity.ok().body(listDto);
+        List<PlanetDTO> listDTO = list.stream().map(x -> new PlanetDTO(x)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDTO);
     }
 }

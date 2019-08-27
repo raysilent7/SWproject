@@ -16,7 +16,7 @@ public class ResouceExceptionHandler {
 
         HttpStatus status = HttpStatus.NOT_FOUND;
         StandardErrorMsg err = new StandardErrorMsg(System.currentTimeMillis(), status.value(),
-                "Nao encontrado", e.getMessage(), request.getRequestURI());
+                "Object not found", e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
 }

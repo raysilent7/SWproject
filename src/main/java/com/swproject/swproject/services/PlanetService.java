@@ -23,4 +23,8 @@ public class PlanetService {
         Optional<Planet> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
     }
+
+    public List<Planet> findByName(String text) {
+        return repo.findByName(text);
+    }
 }

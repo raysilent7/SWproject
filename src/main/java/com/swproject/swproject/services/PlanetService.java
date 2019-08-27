@@ -2,7 +2,7 @@ package com.swproject.swproject.services;
 
 import com.swproject.swproject.domain.Planet;
 import com.swproject.swproject.repository.PlanetRepository;
-import com.swproject.swproject.services.exceptions.ObjectNotFoundException;
+import com.swproject.swproject.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

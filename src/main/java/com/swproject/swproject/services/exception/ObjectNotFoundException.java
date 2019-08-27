@@ -1,4 +1,4 @@
-package com.swproject.swproject.services.exceptions;
+package com.swproject.swproject.services.exception;
 
 public class ObjectNotFoundException extends RuntimeException{
 

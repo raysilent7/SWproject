@@ -1,6 +1,7 @@
 package com.swproject.swproject.services;
 
 import com.swproject.swproject.domain.Planet;
+import com.swproject.swproject.domain.dto.PlanetDTO;
 import com.swproject.swproject.repository.PlanetRepository;
 import com.swproject.swproject.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,20 @@ public class PlanetService {
 
     public List<Planet> findByName(String text) {
         return repo.findByName(text);
+    }
+
+    public Planet insert(Planet obj) {
+        return repo.insert(obj);
+    }
+
+    public Planet fromDTO(PlanetDTO objDto) {
+        if (objDto.getName() == null || objDto.getName().trim().equals("") ||
+                objDto.getWeather() == null || objDto.getWeather().trim().equals("") ||
+                objDto.getTerrain() == null || objDto.getTerrain().trim().equals("")) {
+            throw new ObjectNotFoundException("Object can't be empty");
+        }
+        else {
+            return new Planet(objDto.getId(), objDto.getName(), objDto.getWeather(), objDto.getTerrain());
+        }
     }
 }

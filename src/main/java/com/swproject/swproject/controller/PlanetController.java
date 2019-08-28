@@ -1,4 +1,4 @@
-package com.swproject.swproject.resources;
+package com.swproject.swproject.controller;
 
 import com.swproject.swproject.domain.Planet;
 import com.swproject.swproject.domain.dto.PlanetDTO;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value="/planets")
-public class PlanetResource {
+public class PlanetController {
 
     @Autowired
     private PlanetService service;

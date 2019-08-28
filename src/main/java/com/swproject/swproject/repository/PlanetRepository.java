@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface PlanetRepository extends MongoRepository<Planet, String> {
 
-    @Query("{'name': { $regex: ?0, $options: 'i' } }")
+    @Query("{'name':{ $regex: '^?0', $options: 'i'}}")
     List<Planet> findByName(String text);
 }

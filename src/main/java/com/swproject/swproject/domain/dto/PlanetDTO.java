@@ -1,8 +1,11 @@
 package com.swproject.swproject.domain.dto;
 
+import com.google.gson.JsonArray;
 import com.swproject.swproject.domain.Planet;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlanetDTO implements Serializable {
 
@@ -10,6 +13,8 @@ public class PlanetDTO implements Serializable {
     private String name;
     private String weather;
     private String terrain;
+
+    ArrayList<String> arrayFilms = new ArrayList<String>();
 
     public PlanetDTO() {
     }
@@ -51,5 +56,15 @@ public class PlanetDTO implements Serializable {
 
     public void setTerrain(String terrain) {
         this.terrain = terrain;
+    }
+
+    public ArrayList<String> getArrayFilms() {
+        return arrayFilms;
+    }
+
+    public void setArrayFilms(JsonArray films) {
+        for (int i=0; i<films.size(); i++) {
+            arrayFilms.add(films.get(i).toString());
+        }
     }
 }

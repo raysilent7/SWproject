@@ -33,6 +33,11 @@ public class PlanetService {
         return repo.insert(obj);
     }
 
+    public void delete(String id) {
+        findById(id);
+        repo.deleteById(id);
+    }
+
     public Planet fromDTO(PlanetDTO objDto) {
         if (objDto.getName() == null || objDto.getName().trim().equals("") ||
                 objDto.getWeather() == null || objDto.getWeather().trim().equals("") ||

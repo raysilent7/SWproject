@@ -5,6 +5,7 @@ import com.swproject.swproject.domain.dto.PlanetDTO;
 import com.swproject.swproject.resources.util.URL;
 import com.swproject.swproject.services.PlanetService;
 import com.swproject.swproject.services.exception.ObjectNotFoundException;
+import com.swproject.swproject.swapi.ArgumentSwitcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,8 @@ public class PlanetController {
     @Autowired
     private PlanetService service;
 
+    ArgumentSwitcher as = new ArgumentSwitcher();
+
     @GetMapping
     public ResponseEntity<List<PlanetDTO>> findAll() {
         List<Planet> list = service.findAll();
@@ -31,7 +34,9 @@ public class PlanetController {
     @GetMapping(value="/{id}")
     public ResponseEntity<PlanetDTO> findById(@PathVariable String id) {
         Planet obj = service.findById(id);
-        return ResponseEntity.ok().body(new PlanetDTO(obj));
+        PlanetDTO objDto = new PlanetDTO(obj);
+        as.switcher("planets", objDto.getName(), objDto);
+        return ResponseEntity.ok().body(objDto);
     }
 
     @GetMapping(value="/namesearch")
@@ -52,5 +57,11 @@ public class PlanetController {
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @DeleteMapping(value="/{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

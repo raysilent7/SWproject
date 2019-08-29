@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,11 +41,16 @@ public class PlanetController {
     }
 
     @GetMapping(value="/namesearch")
-    public ResponseEntity<List<Planet>> findByName(@RequestParam(value="text", defaultValue="") String text) {
+    public ResponseEntity<List<PlanetDTO>> findByName(@RequestParam(value="text", defaultValue="") String text) {
         text = URL.decodeParam(text);
         List<Planet> list = service.findByName(text);
-        if (!list.isEmpty()) {
-            return ResponseEntity.ok().body(list);
+        List<PlanetDTO> newList = new ArrayList<>();
+        for (Planet planet : list) {
+            newList.add(new PlanetDTO(planet));
+            as.switcher("planets", planet.getName(), newList.get(list.indexOf(planet)));
+        }
+        if (!newList.isEmpty()) {
+            return ResponseEntity.ok().body(newList);
         }
         else {
             throw new ObjectNotFoundException("Object not found");

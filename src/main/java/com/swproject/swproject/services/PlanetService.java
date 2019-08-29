@@ -4,6 +4,7 @@ import com.swproject.swproject.domain.Planet;
 import com.swproject.swproject.domain.dto.PlanetDTO;
 import com.swproject.swproject.repository.PlanetRepository;
 import com.swproject.swproject.services.exception.ObjectNotFoundException;
+import com.swproject.swproject.swapi.ArgumentSwitcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,11 +34,6 @@ public class PlanetService {
         return repo.insert(obj);
     }
 
-    public void delete(String id) {
-        findById(id);
-        repo.deleteById(id);
-    }
-
     public Planet fromDTO(PlanetDTO objDto) {
         if (objDto.getName() == null || objDto.getName().trim().equals("") ||
                 objDto.getWeather() == null || objDto.getWeather().trim().equals("") ||
@@ -47,5 +43,10 @@ public class PlanetService {
         else {
             return new Planet(objDto.getId(), objDto.getName(), objDto.getWeather(), objDto.getTerrain());
         }
+    }
+
+    public void delete(String id) {
+        findById(id);
+        repo.deleteById(id);
     }
 }

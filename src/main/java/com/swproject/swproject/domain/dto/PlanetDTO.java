@@ -2,19 +2,29 @@ package com.swproject.swproject.domain.dto;
 
 import com.google.gson.JsonArray;
 import com.swproject.swproject.domain.Planet;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 public class PlanetDTO implements Serializable {
 
     private String id;
+
+    @Length(min=2, max=20, message="Name must be between 2 and 20 characters")
+    @NotEmpty(message="Field can't be empty")
     private String name;
+
+    @Length(min=2, max=80, message="Name must be between 2 and 80 characters")
+    @NotEmpty(message="Field can't be empty")
     private String weather;
+
+    @Length(min=2, max=80, message="Name must be between 2 and 80 characters")
+    @NotEmpty(message="Field can't be empty")
     private String terrain;
 
-    ArrayList<String> arrayFilms = new ArrayList<String>();
+    ArrayList<String> arrayFilms = new ArrayList<>();
 
     public PlanetDTO() {
     }
